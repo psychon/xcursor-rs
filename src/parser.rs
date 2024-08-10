@@ -237,7 +237,7 @@ mod tests {
     #[test]
     fn test_parse_image() {
         // The image always repeats the same pixels across its 4 x 4 pixels
-        let make_pixels = |pixel: [u8; 4]| pixel.repeat(4 * 4);
+        let make_pixels = |pixel: [u8; 4]| std::iter::repeat(pixel).take(4 * 4).flatten().collect();
         let expected = Image {
             size: 4,
             width: 4,

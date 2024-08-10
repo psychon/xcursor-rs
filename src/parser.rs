@@ -237,7 +237,13 @@ mod tests {
     #[test]
     fn test_parse_image() {
         // The image always repeats the same pixels across its 4 x 4 pixels
-        let make_pixels = |pixel: [u8; 4]| std::iter::repeat(pixel).take(4 * 4).flatten().collect();
+        let make_pixels = |pixel: [u8; 4]| {
+            // This is just "pixels.repeat(4 * 4)", but working in Rust 1.34
+            std::iter::repeat(pixel)
+                .take(4 * 4)
+                .flat_map(|p| p.iter().copied().collect::<Vec<_>>())
+                .collect()
+        };
         let expected = Image {
             size: 4,
             width: 4,

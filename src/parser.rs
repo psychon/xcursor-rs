@@ -241,7 +241,7 @@ mod tests {
             // This is just "pixels.repeat(4 * 4)", but working in Rust 1.34
             std::iter::repeat(pixel)
                 .take(4 * 4)
-                .flat_map(|p| p.iter().copied().collect::<Vec<_>>())
+                .flat_map(|p| p.iter().cloned().collect::<Vec<_>>())
                 .collect()
         };
         let expected = Image {
